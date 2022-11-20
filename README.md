@@ -18,7 +18,7 @@ Then, run the containers by typing(If no images exist, it will automatically pul
 "sudo docker compose up -d" 
 
 To import the database by SQL, you can simply connect the MySQL databse by the MySQL extension.
-Then placing all the SQL in TSS.sql into a newly created SQL file. Next, execute.
+Then placing all the SQL in TSS.sql(docker-compose-stack/dump) into a newly created SQL file. Next, execute.
 
 To make the website sucessfully connecting to the database, you need to edit some php files under docker-compose-stack/www/3335 on host machine:
 
@@ -27,6 +27,12 @@ To make the website sucessfully connecting to the database, you need to edit som
 3.Buying.php: on line 13, change the ip address to your own docker IP address 
 4.Registration.php: on line 13, change the ip address to your own docker IP address
 5. Ticket.php: on line 16, change the ip address to your own docker IP address
+
+The default username and password for database login and myphpadmin:
+username:root
+password:test
+
+The website can be accessed by http://localhost/3335
 
 
 
