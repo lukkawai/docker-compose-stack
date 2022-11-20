@@ -11,8 +11,11 @@ To pull this LAMP stack to your linux machine and run the the docker , please en
 
 git clone https://github.com/lukkawai/docker-compose-stack.git 
 
+Then change the directory of the terminal to the root folder of the docker-compose-stack by "cd" command.
+
 Then, run the containers by typing(If no images exist, it will automatically pull the required images):
-docker compose up -d
+"sudo docker compose up -d" 
+
 
 
 
