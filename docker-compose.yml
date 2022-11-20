@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+    db:
+        image: mysql
+        ports: 
+            - "3306:3306"
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_DATABASE: dbname
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test 
+        volumes:
+            - ./dump:/docker-entrypoint-initdb.d
+            - ./conf:/etc/mysql/conf.d
+            - persistent:/var/lib/mysql
+        networks:
+            - default
+    www:
+        build: .
+        ports: 
+            - "80:80"
+        volumes:
+            - ./www:/var/www/html
+        links:
+            - db
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - db:db
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_USER: root
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+    st-agent:
+        image: sematext/agent:latest
+        privileged: true
+        environment:
+            - INFRA_TOKEN=02d9ef55-79ec-4f53-980d-495ec051255a
+            - SERVER_BASE_URL=https://spm-receiver.sematext.com/
+            - LOGS_RECEIVER_URL=https://logsene-receiver.sematext.com/
+            - EVENT_RECEIVER_URL=https://event-receiver.sematext.com/
+            - COMMAND_SERVER_URL=https://command.sematext.com/
+        cap_add:
+            - SYS_ADMIN
+        restart: always
+        volumes:
+            - /:/hostfs:ro
+            - /etc/passwd:/etc/passwd:ro
+            - /etc/group:/etc/group:ro
+            - /var/run/:/var/run
+            - /sys/kernel/debug:/sys/kernel/debug
+            - /sys:/host/sys:ro
+            - /dev:/hostfs/dev:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+volumes:
+    persistent:
