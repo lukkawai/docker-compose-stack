@@ -7,6 +7,14 @@ Demostration Video Link:
 https://youtu.be/LrPHfLAmc-U
 
 
+To pull this LAMP stack to your linux machine and run the the docker , please enter:
+
+git clone
+
+docker compose up 
+
+
+
 
 
 
