@@ -9,7 +9,7 @@ https://youtu.be/LrPHfLAmc-U
 
 To pull this LAMP stack to your linux machine and run the the docker , please enter:
 
-git clone https://github.com/lukkawai/docker-compose-stack/blob/main/
+git clone https://github.com/lukkawai/docker-compose-stack.git 
 
 docker compose up 
 
